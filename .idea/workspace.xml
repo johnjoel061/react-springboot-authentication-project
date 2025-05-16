@@ -4,7 +4,13 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="1badc590-71fb-4659-8140-da9369b0041f" name="Changes" comment="Initial commit" />
+    <list default="true" id="1badc590-71fb-4659-8140-da9369b0041f" name="Changes" comment="Initial commit">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/authentication-client/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/authentication-client/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/authentication-client/public/vite.svg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/authentication-client/src/App.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/authentication-client/src/App.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/authentication-client/src/assets/react.svg" beforeDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -13,9 +19,12 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
-  <component name="ProjectColorInfo"><![CDATA[{
-  "associatedIndex": 5
-}]]></component>
+  <component name="HighlightingSettingsPerFile">
+    <setting file="file://$PROJECT_DIR$/authentication-client/index.html" root0="FORCE_HIGHLIGHTING" />
+  </component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 5
+}</component>
   <component name="ProjectId" id="2xB0uZuooqWbG7BcI7WxTAJgDOZ" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
@@ -27,8 +36,9 @@
     "ModuleVcsDetector.initialDetectionPerformed": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "git-widget-placeholder": "master",
-    "last_opened_file_path": "C:/Users/jhon joel alfabete/OneDrive/Desktop/react-springboot-authentication-project"
+    "git-widget-placeholder": "main",
+    "last_opened_file_path": "C:/Users/jhon joel alfabete/OneDrive/Desktop/react-springboot-authentication-project",
+    "settings.editor.selected.configurable": "preferences.pluginManager"
   }
 }]]></component>
   <component name="TaskManager">
@@ -55,7 +65,15 @@
       <option name="project" value="LOCAL" />
       <updated>1747397354474</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="Initial commit">
+      <option name="closed" value="true" />
+      <created>1747397891576</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1747397891576</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
