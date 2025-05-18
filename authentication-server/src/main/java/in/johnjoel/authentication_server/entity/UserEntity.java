@@ -34,6 +34,8 @@ public class UserEntity {
 
     private String verifyOtp;
 
+    private Long verifyOtpExpireAt;
+
     private String isAccountVerified;
 
     private String resetOtp;
