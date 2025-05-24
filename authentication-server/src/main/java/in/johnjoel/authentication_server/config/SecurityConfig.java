@@ -1,5 +1,7 @@
 package in.johnjoel.authentication_server.config;
 
+import in.johnjoel.authentication_server.exception.CustomAccessDeniedHandler;
+import in.johnjoel.authentication_server.exception.CustomAuthenticationEntryPoint;
 import in.johnjoel.authentication_server.service.AppUserDetailsService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
@@ -28,14 +30,19 @@ import java.util.List;
 public class SecurityConfig {
 
     private final AppUserDetailsService appUserDetailsService;
-
+    private final CustomAccessDeniedHandler customAccessDeniedHandler;
+    private final CustomAuthenticationEntryPoint customAuthenticationEntryPoint;
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http.cors(Customizer.withDefaults())
                 .csrf(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests(auth -> auth
-                        .requestMatchers("/login", "register", "/send-reset-otp", "reset-password", "/logout")
-                        .permitAll().anyRequest().authenticated())
+                        .requestMatchers("/login", "/register", "/send-reset-otp", "/reset-password", "/logout")
+                        .permitAll()
+                        .anyRequest().authenticated())
+                .exceptionHandling(exception -> exception
+                        .authenticationEntryPoint(customAuthenticationEntryPoint) // for 401
+                        .accessDeniedHandler(customAccessDeniedHandler)) // 403
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .logout(AbstractHttpConfigurer::disable);
         return http.build();
@@ -70,6 +77,5 @@ public class SecurityConfig {
         authenticationProvider.setPasswordEncoder(passwordEncoder());
         return new ProviderManager(authenticationProvider);
     }
-
 
 }
