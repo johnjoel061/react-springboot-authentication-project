@@ -46,7 +46,7 @@ public class JwtRequestFilter extends OncePerRequestFilter {
 
         //if not found in the header, check cookies
         if (jwt == null) {
-            Cookie cookies = request.getCookies();
+            Cookie[] cookies = request.getCookies();
             if (cookies != null) {
                 for (Cookie cookie: cookies) {
                     if ("jwt".equals(cookie.getName())) {
@@ -63,8 +63,9 @@ public class JwtRequestFilter extends OncePerRequestFilter {
             if (email != null && SecurityContextHolder.getContext().getAuthentication() == null) {
                 UserDetails userDetails = appUserDetailsService.loadUserByUsername(email);
                 if (jwtUtil.validateToken(jwt, userDetails)) {
+                    UsernamePasswordAuthenticationToken authenticationToken =
                     new UsernamePasswordAuthenticationToken(userDetails, null, userDetails.getAuthorities());
-                    authenticationToken.setDatails(new WebAuthenticationDetailsSource().buildDetails(request));
+                    authenticationToken.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
                     SecurityContextHolder.getContext().setAuthentication(authenticationToken);
                 }
             }
