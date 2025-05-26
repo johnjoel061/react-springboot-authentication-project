@@ -1,7 +1,6 @@
 package in.johnjoel.authentication_server.config;
 
 import in.johnjoel.authentication_server.exception.CustomAccessDeniedHandler;
-import in.johnjoel.authentication_server.exception.CustomAuthenticationEntryPoint;
 import in.johnjoel.authentication_server.filter.JwtRequestFilter;
 import in.johnjoel.authentication_server.service.AppUserDetailsService;
 import lombok.RequiredArgsConstructor;
@@ -33,7 +32,8 @@ public class SecurityConfig {
 
     private final AppUserDetailsService appUserDetailsService;
     private final JwtRequestFilter jwtRequestFilter;
-    private final CustomAccessDeniedHandler customAccessDeniedHandler;
+//    private final CustomAccessDeniedHandler customAccessDeniedHandler;
+//    private final CustomAuthenticationEntryPoint customAuthenticationEntryPoint;
     private final CustomAuthenticationEntryPoint customAuthenticationEntryPoint;
 
     @Bean
@@ -44,12 +44,13 @@ public class SecurityConfig {
                         .requestMatchers("/login", "/register", "/send-reset-otp", "/reset-password", "/logout")
                         .permitAll()
                         .anyRequest().authenticated())
-                .exceptionHandling(exception -> exception
-                        .authenticationEntryPoint(customAuthenticationEntryPoint) // for 401
-                        .accessDeniedHandler(customAccessDeniedHandler)) // 403
+//                .exceptionHandling(exception -> exception
+//                        .authenticationEntryPoint(customAuthenticationEntryPoint) // for 401
+//                        .accessDeniedHandler(customAccessDeniedHandler)) // 403
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .logout(AbstractHttpConfigurer::disable)
-                .addFilterBefore(jwtRequestFilter, UsernamePasswordAuthenticationFilter.class);
+                .addFilterBefore(jwtRequestFilter, UsernamePasswordAuthenticationFilter.class)
+                .exceptionHandling(ex -> ex.authenticationEntryPoint(customAuthenticationEntryPoint));
 
         return http.build();
     }

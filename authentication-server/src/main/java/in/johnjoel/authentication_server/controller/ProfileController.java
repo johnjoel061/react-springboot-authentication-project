@@ -24,13 +24,8 @@ public class ProfileController {
         return response;
     }
 
-//    @GetMapping("/test")
-//    public String test() {
-//        return "Auth is working!!!";
-//    }
-
     @GetMapping("/profile")
     public ProfileResponse getProfile(@CurrentSecurityContext(expression = "authentication?.name") String email) {
-
+        return profileService.getProfile(email);
     }
 }
