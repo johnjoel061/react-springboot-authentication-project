@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
 import java.util.UUID;
+import java.util.concurrent.ThreadLocalRandom;
 
 @Service
 @RequiredArgsConstructor
@@ -38,6 +39,31 @@ public class ProfileServiceImpl implements ProfileService {
         UserEntity existingUser = userRepository.findByEmail(email)
                 .orElseThrow(() -> new UsernameNotFoundException("User not found: "+email));
         return convertToProfileResponse(existingUser);
+    }
+
+    @Override
+    public void sendResetOtp(String email) {
+        UserEntity existingEntity = userRepository.findByEmail(email)
+                .orElseThrow(() -> new UsernameNotFoundException("User not found: "+email));
+
+        //Generate 6 digit otp
+        String otp = String.valueOf(ThreadLocalRandom.current().nextInt(100000, 100000));
+
+        //Calculate expiry time (current time + 15 minutes in milliseconds)
+        long expiryTime = System.currentTimeMillis() + (15 * 60 * 1000);
+
+        //Update the profile/user
+        existingEntity.setResetOtp(otp);
+        existingEntity.setResetOtpExpiresAt(expiryTime);
+
+        //save into the database
+        userRepository.save(existingEntity);
+
+        try {
+            //TODO: send the reset otp
+        } catch (Exception ex) {
+            throw new RuntimeException("Unable to send email");
+        }
     }
 
     private ProfileResponse convertToProfileResponse(UserEntity userEntity) {
